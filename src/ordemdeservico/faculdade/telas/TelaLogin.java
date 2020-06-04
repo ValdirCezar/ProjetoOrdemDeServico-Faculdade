@@ -5,6 +5,10 @@
  */
 package ordemdeservico.faculdade.telas;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Valdir Cezar
@@ -103,10 +107,12 @@ public class TelaLogin extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // Ação entrar na Tela de Login
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        
+        logar();
     }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
@@ -152,4 +158,37 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JTextField txtLogin;
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
+
+
+    private void logar() {
+        // Validando se algum campo do login está vazio
+        if (this.txtLogin.getText().isEmpty() || this.txtSenha.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+        } else {
+            try {
+                // Analisando a existência do usuário no sistema
+                BufferedReader br = new BufferedReader(new FileReader("usuario.txt"));
+                String linha;
+                String[] vet = null;
+                boolean aux = false;
+                while ((linha = br.readLine()) != null) {
+                    vet = linha.split(",");
+                    if(vet[2].equals(this.txtLogin.getText()) && vet[3].equals(this.txtSenha.getText())){
+                        TelaPrincipal telaPrincipal = new TelaPrincipal();
+                        telaPrincipal.setVisible(true);
+                        this.setVisible(false);
+                        aux = true;
+                    }
+                }
+                if(!(aux)){
+                    JOptionPane.showMessageDialog(null, "Usuário e/ou senha não encontrados!");
+                }
+                
+            } catch (Exception e) {
+                e.getStackTrace();
+            }
+        }
+    }
+
+
 }
