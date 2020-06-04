@@ -7,7 +7,7 @@ package ordemdeservico.faculdade;
 
 /**
  *
- * @author a760050
+ * @author Valdir Cezar
  */
 public class OrdemDeServicoFaculdade {
 
