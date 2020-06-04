@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package ordemdeservico.faculdade.telas;
 
 /**
  *
- * @author a760050
+ * @author Valdir Cezar
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
@@ -27,9 +23,69 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        menuUsuarios = new javax.swing.JMenu();
+        itemMenuUsuarios = new javax.swing.JMenuItem();
+        menuClientes = new javax.swing.JMenu();
+        itemMenuClientes = new javax.swing.JMenuItem();
+        menuOs = new javax.swing.JMenu();
+        itemMenuOs = new javax.swing.JMenuItem();
+        itemMenuOpcoes = new javax.swing.JMenu();
+        itemMenuSobre = new javax.swing.JMenuItem();
+        itemMenuSair = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Tela Principal");
         setResizable(false);
+
+        menuUsuarios.setText("Usuários");
+        menuUsuarios.setEnabled(false);
+        menuUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUsuariosActionPerformed(evt);
+            }
+        });
+
+        itemMenuUsuarios.setText("Gerênciar Usuários");
+        itemMenuUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuUsuariosActionPerformed(evt);
+            }
+        });
+        menuUsuarios.add(itemMenuUsuarios);
+
+        jMenuBar1.add(menuUsuarios);
+
+        menuClientes.setText("Clientes");
+
+        itemMenuClientes.setText("Gerênciar Clientes");
+        menuClientes.add(itemMenuClientes);
+
+        jMenuBar1.add(menuClientes);
+
+        menuOs.setText("OS");
+
+        itemMenuOs.setText("Gerênciar Ordens de Serviço");
+        menuOs.add(itemMenuOs);
+
+        jMenuBar1.add(menuOs);
+
+        itemMenuOpcoes.setText("Opções");
+
+        itemMenuSobre.setText("Sobre");
+        itemMenuOpcoes.add(itemMenuSobre);
+
+        itemMenuSair.setText("Sair");
+        itemMenuSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuSairActionPerformed(evt);
+            }
+        });
+        itemMenuOpcoes.add(itemMenuSair);
+
+        jMenuBar1.add(itemMenuOpcoes);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -39,12 +95,22 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 708, Short.MAX_VALUE)
+            .addGap(0, 685, Short.MAX_VALUE)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void itemMenuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuUsuariosActionPerformed
+    }//GEN-LAST:event_itemMenuUsuariosActionPerformed
+
+    private void menuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuariosActionPerformed
+
+    }//GEN-LAST:event_menuUsuariosActionPerformed
+
+    private void itemMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuSairActionPerformed
+    }//GEN-LAST:event_itemMenuSairActionPerformed
 
     /**
      * @param args the command line arguments
@@ -82,5 +148,15 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem itemMenuClientes;
+    private javax.swing.JMenu itemMenuOpcoes;
+    private javax.swing.JMenuItem itemMenuOs;
+    private javax.swing.JMenuItem itemMenuSair;
+    private javax.swing.JMenuItem itemMenuSobre;
+    private javax.swing.JMenuItem itemMenuUsuarios;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenu menuClientes;
+    private javax.swing.JMenu menuOs;
+    public static javax.swing.JMenu menuUsuarios;
     // End of variables declaration//GEN-END:variables
 }

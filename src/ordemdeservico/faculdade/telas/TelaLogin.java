@@ -183,7 +183,7 @@ public class TelaLogin extends javax.swing.JFrame {
                 if(!(aux)){
                     JOptionPane.showMessageDialog(null, "Usuário e/ou senha não encontrados!");
                 }
-                
+                br.close();
             } catch (Exception e) {
                 e.getStackTrace();
             }
