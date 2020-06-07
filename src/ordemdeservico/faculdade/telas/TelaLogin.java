@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ordemdeservico.faculdade.telas;
 
 import java.io.BufferedReader;
@@ -159,7 +154,6 @@ public class TelaLogin extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtSenha;
     // End of variables declaration//GEN-END:variables
 
-
     private void logar() {
         // Validando se algum campo do login está vazio
         if (this.txtLogin.getText().isEmpty() || this.txtSenha.getText().isEmpty()) {
@@ -173,14 +167,27 @@ public class TelaLogin extends javax.swing.JFrame {
                 boolean aux = false;
                 while ((linha = br.readLine()) != null) {
                     vet = linha.split(",");
-                    if(vet[2].equals(this.txtLogin.getText()) && vet[3].equals(this.txtSenha.getText())){
-                        TelaPrincipal telaPrincipal = new TelaPrincipal();
-                        telaPrincipal.setVisible(true);
-                        this.setVisible(false);
-                        aux = true;
+                    if (vet[2].equals(this.txtLogin.getText()) && vet[3].equals(this.txtSenha.getText())) {
+                        // Validando o perfil de acesso do user ao sistema
+                        if (vet[4].equals("admin")) {
+                            // Se o user for admin ele acessa a tela de gerenciamento de usuários
+                            TelaPrincipal telaPrincipal = new TelaPrincipal();
+                            telaPrincipal.setVisible(true);
+                            TelaPrincipal.menuUsuarios.setEnabled(true);
+                            this.setVisible(false);
+                            aux = true;
+                        } else {
+                            // Se não for admin não gerencia usuários
+                            TelaPrincipal telaPrincipal = new TelaPrincipal();
+                            telaPrincipal.setVisible(true);
+                            this.setVisible(false);
+                            aux = true;
+                        }
                     }
                 }
-                if(!(aux)){
+                // Caso o usuário não seja encontrado no sistema o auxiliar valerá false
+                // e será disparada a mensagem de que o usuário não foi encontrado
+                if (!(aux)) {
                     JOptionPane.showMessageDialog(null, "Usuário e/ou senha não encontrados!");
                 }
                 br.close();
@@ -189,6 +196,5 @@ public class TelaLogin extends javax.swing.JFrame {
             }
         }
     }
-
 
 }

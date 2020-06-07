@@ -32,9 +32,9 @@ public class TelaOrdemDeServicos extends javax.swing.JFrame {
         txtTecnico = new javax.swing.JTextField();
         lblTecnico = new javax.swing.JLabel();
         txtCliente = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
+        lblCliente = new javax.swing.JLabel();
         cbmStatus = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
+        lblStatus = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTecnicos = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -74,11 +74,11 @@ public class TelaOrdemDeServicos extends javax.swing.JFrame {
 
         lblTecnico.setText("Técnico");
 
-        jLabel1.setText("Cliente");
+        lblCliente.setText("Cliente");
 
         cbmStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Aberto", "Andamento", "Encerrado" }));
 
-        jLabel3.setText("Status");
+        lblStatus.setText("Status");
 
         tblTecnicos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -200,8 +200,8 @@ public class TelaOrdemDeServicos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValor)
                             .addComponent(lblTecnico)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
+                            .addComponent(lblCliente)
+                            .addComponent(lblStatus))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtCliente)
@@ -237,11 +237,11 @@ public class TelaOrdemDeServicos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(lblCliente))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbmStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
+                    .addComponent(lblStatus))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,16 +316,16 @@ public class TelaOrdemDeServicos extends javax.swing.JFrame {
     private javax.swing.JButton btnEncerrar;
     private javax.swing.JButton btnRemover;
     private javax.swing.JComboBox cbmStatus;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblCliente;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblId;
     private javax.swing.JLabel lblObservacoes;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblTblCliente;
     private javax.swing.JLabel lblTblTecnico;
     private javax.swing.JLabel lblTecnico;
