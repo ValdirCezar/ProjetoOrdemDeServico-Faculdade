@@ -43,7 +43,7 @@ public class TelaUsuario extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         txtSenha = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Tela Ordem de Serviço");
 
         lblId.setText("ID");
@@ -195,7 +195,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
-        if (adicionarUsuario()) {
+        if (adicionar_usuario()) {
             JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
@@ -205,7 +205,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        //editarUsuario();
+        editar_usuario();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
@@ -213,11 +213,11 @@ public class TelaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void tblUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUsuariosMouseClicked
-        //preencher_campos_txt();
+        preencher_campos_txt();
     }//GEN-LAST:event_tblUsuariosMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        buscarUsuarios();
+        buscar_usuarios();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     /**
@@ -275,7 +275,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     // Método para validar se todos os campos estão preenchidos
-    private boolean verificaCampos() {
+    private boolean verifica_campos() {
         if (this.txtNome.getText().isEmpty() || this.txtLogin.getText().isEmpty() || this.txtSenha.getText().isEmpty()) {
             // Se algum campo estiver vazio retorna true
             return true;
@@ -285,7 +285,7 @@ public class TelaUsuario extends javax.swing.JFrame {
     }
 
     // Método para gerar um ID para o usuário automaticamente
-    private void gerarIdUsuario() {
+    private void gerar_id_usuario() {
         // A função abaixo irá acessar o arquivo de usuarios e analisar o ultimo
         // ID criado e o maior ID no sistema, então irá atribuir um valor a mais
         // a variável local "id" criada acima
@@ -312,7 +312,7 @@ public class TelaUsuario extends javax.swing.JFrame {
 
     // Método que irá verificar se o usuário já está cadastrado
     // no sistema para que o mesmo login não seja adicionado 2 vezes
-    private boolean verificaDispLogin() {
+    private boolean verifica_disp_login() {
         boolean aux = false;
         try {
             BufferedReader bread = new BufferedReader(new FileReader("usuario.txt"));
@@ -334,28 +334,39 @@ public class TelaUsuario extends javax.swing.JFrame {
     }
 
     // Método que irá apenas limpar os campos Texto
-    private void limpaTxt() {
+    private void limpa_txt() {
         this.txtNome.setText(null);
         this.txtLogin.setText(null);
         this.txtSenha.setText(null);
         this.txtId.setText(null);
     }
 
+    // Função irá pegar as informações da linha selecionada na 
+    // tabela e irá inseri-las nos campos txt
+    private void preencher_campos_txt() {
+        int set = this.tblUsuarios.getSelectedRow();
+        this.txtId.setText(this.tblUsuarios.getModel().getValueAt(set, 0).toString());
+        this.txtNome.setText(this.tblUsuarios.getModel().getValueAt(set, 1).toString());
+        this.txtLogin.setText(this.tblUsuarios.getModel().getValueAt(set, 2).toString());
+        this.txtSenha.setText(this.tblUsuarios.getModel().getValueAt(set, 3).toString());
+        this.cmbPerfil.setToolTipText(this.tblUsuarios.getModel().getValueAt(set, 4).toString());
+    }
+
     // Método adiconar um novo usuário no sistema
-    private boolean adicionarUsuario() {
+    private boolean adicionar_usuario() {
         boolean aux = false;
         // Caso algum campo esteja vazio o mesmo será informado
-        boolean verificaCampos = verificaCampos();
+        boolean verificaCampos = verifica_campos();
         if (verificaCampos) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         } else {
             // Caso o login já exista o mesmo será informado
-            boolean verDispLogin = verificaDispLogin();
+            boolean verDispLogin = verifica_disp_login();
             if (verDispLogin) {
                 JOptionPane.showMessageDialog(null, "Login indisponível!");
                 this.txtLogin.setText(null);
             } else {
-                gerarIdUsuario();
+                gerar_id_usuario();
                 this.txtId.setText(Integer.toString(this.id));
                 // Se atender as condições acima adicionaremos o mesmo
                 try {
@@ -372,7 +383,7 @@ public class TelaUsuario extends javax.swing.JFrame {
                             + "," + this.txtSenha.getText() + "," + perfil);
                     bw.newLine();
                     bw.close();
-                    limpaTxt();
+                    limpa_txt();
                     aux = true;
                 } catch (Exception e) {
                     e.getStackTrace();
@@ -382,7 +393,8 @@ public class TelaUsuario extends javax.swing.JFrame {
         return aux;
     }
 
-    private void buscarUsuarios() {
+    // Função que irá povoar a tabela com os usuários do sistema
+    private void buscar_usuarios() {
         DefaultTableModel model = (DefaultTableModel) this.tblUsuarios.getModel();
         try {
             BufferedReader br = new BufferedReader(new FileReader("usuario.txt"));
@@ -390,11 +402,44 @@ public class TelaUsuario extends javax.swing.JFrame {
             String[] vet = null;
             while ((linha = br.readLine()) != null) {
                 vet = linha.split(",");
-                model.addRow(new String[] {vet[0], vet[1], vet[2], vet[3], vet[4]});
+                model.addRow(new String[]{vet[0], vet[1], vet[2], vet[3], vet[4]});
             }
             br.close();
         } catch (Exception e) {
             e.getStackTrace();
         }
+    }
+
+    // Função criada para realizar a edição do usuário
+    private void editar_usuario() {
+        boolean aux = false;
+        try {
+            // Primeiro verificamos a existência do login informado para edição
+            BufferedReader br = new BufferedReader(new FileReader("usuario.txt"));
+            String linha;
+            String[] vet = null;
+            while ((linha = br.readLine()) != null) {
+                vet = linha.split(",");
+                // Se o login existe
+                if (vet[2].equals(this.txtLogin.getText())) {
+                    // aux = true e id = id do login informado
+                    aux = true;
+                    this.id = Integer.parseInt(vet[0]);
+                }
+            }
+            br.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+
+        if (aux) {
+            TelaEditarUsuario editarUsuario = new TelaEditarUsuario();
+            editarUsuario.recebe_id(this.id, this.txtNome.getText(), this.txtLogin.getText(), this.txtSenha.getText());
+            editarUsuario.setVisible(true);
+        } else {
+            buscar_usuarios();
+            JOptionPane.showMessageDialog(null, "Login não encontrado!\nSelecione um login válidao na tabela abaixo");
+        }
+
     }
 }
