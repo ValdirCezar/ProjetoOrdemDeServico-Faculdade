@@ -1,4 +1,3 @@
-
 package ordemdeservico.faculdade.telas;
 
 /**
@@ -120,6 +119,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void itemMenuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuUsuariosActionPerformed
+        gerenciar_usuario();
     }//GEN-LAST:event_itemMenuUsuariosActionPerformed
 
     private void menuUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuariosActionPerformed
@@ -177,4 +177,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuOs;
     public static javax.swing.JMenu menuUsuarios;
     // End of variables declaration//GEN-END:variables
+
+    private void gerenciar_usuario() {
+        TelaUsuario telaUsu = new TelaUsuario();
+        telaUsu.setVisible(true);
+        desktop.add(telaUsu);
+    }
 }

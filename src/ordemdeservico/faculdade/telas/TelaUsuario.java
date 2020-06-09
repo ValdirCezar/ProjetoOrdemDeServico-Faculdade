@@ -9,14 +9,14 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Valdir Cezar
+ * @author valdir Cezar
  */
-public class TelaUsuario extends javax.swing.JFrame {
+public class TelaUsuario extends javax.swing.JInternalFrame {
 
     private int id = 1;
 
     /**
-     * Creates new form TelaUsuario
+     * Creates new form TelasUsuario
      */
     public TelaUsuario() {
         initComponents();
@@ -26,11 +26,6 @@ public class TelaUsuario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblId = new javax.swing.JLabel();
-        lblLogin = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
-        lblSenha = new javax.swing.JLabel();
-        cmbPerfil = new javax.swing.JComboBox();
         lblPerfil = new javax.swing.JLabel();
         btnAdicionar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
@@ -38,23 +33,21 @@ public class TelaUsuario extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUsuarios = new javax.swing.JTable();
+        lblId = new javax.swing.JLabel();
+        lblLogin = new javax.swing.JLabel();
         lblNome = new javax.swing.JLabel();
+        txtId = new javax.swing.JTextField();
         txtLogin = new javax.swing.JTextField();
+        lblSenha = new javax.swing.JLabel();
         btnBuscar = new javax.swing.JButton();
+        cmbPerfil = new javax.swing.JComboBox();
         txtSenha = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Tela Ordem de Serviço");
-
-        lblId.setText("ID");
-
-        lblLogin.setText("Login");
-
-        txtId.setEnabled(false);
-
-        lblSenha.setText("Senha");
-
-        cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Padrão", "Admin" }));
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setTitle("Gerenciamento de Usuários");
+        setPreferredSize(new java.awt.Dimension(754, 622));
 
         lblPerfil.setText("Perfil");
 
@@ -108,7 +101,15 @@ public class TelaUsuario extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblUsuarios);
 
+        lblId.setText("ID");
+
+        lblLogin.setText("Login");
+
         lblNome.setText("Nome");
+
+        txtId.setEnabled(false);
+
+        lblSenha.setText("Senha");
 
         btnBuscar.setText("Buscar Usuários");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,14 +118,17 @@ public class TelaUsuario extends javax.swing.JFrame {
             }
         });
 
+        cmbPerfil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Padrão", "Admin" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
+                        .addGap(117, 117, 117)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,17 +155,15 @@ public class TelaUsuario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
+                        .addGap(188, 188, 188)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(19, 19, 19)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(21, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
+                .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblNome))
@@ -184,11 +186,11 @@ public class TelaUsuario extends javax.swing.JFrame {
                     .addComponent(btnAdicionar)
                     .addComponent(btnRemover)
                     .addComponent(btnEditar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 190, Short.MAX_VALUE)
                 .addComponent(btnBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(33, 33, 33))
         );
 
         pack();
@@ -220,40 +222,6 @@ public class TelaUsuario extends javax.swing.JFrame {
         buscar_usuarios();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaUsuario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new TelaUsuario().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
