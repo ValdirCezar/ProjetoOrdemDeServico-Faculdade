@@ -87,6 +87,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClienteMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCliente);
 
         btnBuscar.setText("BUSCAR");
@@ -105,7 +110,9 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         lblEmail.setText("E-mail");
 
         txtId.setEnabled(false);
+        txtId.setPreferredSize(new java.awt.Dimension(15, 24));
 
+        lblId.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         lblId.setText("ID");
 
         try {
@@ -211,6 +218,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         buscar_clientes();
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void tblClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClienteMouseClicked
+        preencher_campos_txt();
+    }//GEN-LAST:event_tblClienteMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -331,5 +342,16 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         } catch (Exception e) {
             e.getStackTrace();
         }
+    }
+    
+    // Função irá pegar as informações da linha selecionada na 
+    // tabela e irá inseri-las nos campos txt
+    private void preencher_campos_txt() {
+        int set = this.tblCliente.getSelectedRow();
+        this.txtId.setText(this.tblCliente.getModel().getValueAt(set, 0).toString());
+        this.txtNome.setText(this.tblCliente.getModel().getValueAt(set, 1).toString());
+        this.txtEmail.setText(this.tblCliente.getModel().getValueAt(set, 2).toString());
+        this.txtTel.setText(this.tblCliente.getModel().getValueAt(set, 3).toString());
+        this.txtCpf.setText(this.tblCliente.getModel().getValueAt(set, 4).toString());
     }
 }
