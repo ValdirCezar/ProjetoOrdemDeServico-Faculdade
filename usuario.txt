@@ -1,3 +1,0 @@
-1,admin,admin,admin,admin
-2,admin,admin2,admin,admin
-3,admin,teste,admin,padrao

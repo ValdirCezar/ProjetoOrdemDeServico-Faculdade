@@ -70,6 +70,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         menuClientes.setText("Clientes");
 
         itemMenuClientes.setText("Gerênciar Clientes");
+        itemMenuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuClientesActionPerformed(evt);
+            }
+        });
         menuClientes.add(itemMenuClientes);
 
         jMenuBar1.add(menuClientes);
@@ -129,6 +134,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void itemMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuSairActionPerformed
     }//GEN-LAST:event_itemMenuSairActionPerformed
 
+    private void itemMenuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuClientesActionPerformed
+        gerenciar_cliente();
+    }//GEN-LAST:event_itemMenuClientesActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -178,9 +187,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public static javax.swing.JMenu menuUsuarios;
     // End of variables declaration//GEN-END:variables
 
+    // Método para criar uma nova tela de gerenciamento de usuários
     private void gerenciar_usuario() {
         TelaUsuario telaUsu = new TelaUsuario();
         telaUsu.setVisible(true);
         desktop.add(telaUsu);
+    }
+
+    // Método para criar uma nova tela de gerenciamento de clientes
+    private void gerenciar_cliente() {
+        TelaCliente telaCli = new TelaCliente();
+        telaCli.setVisible(true);
+        desktop.add(telaCli);
     }
 }
