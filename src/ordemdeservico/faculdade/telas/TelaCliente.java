@@ -70,6 +70,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         btnRemover.setText("REMOVER");
 
         btnEditar.setText("EDITAR");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         tblCliente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -223,6 +228,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         preencher_campos_txt();
     }//GEN-LAST:event_tblClienteMouseClicked
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        editar_cliente();
+    }//GEN-LAST:event_btnEditarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -270,7 +279,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     }
 
     // método que irá verificar se todos os campos estão preenchidos
-    private boolean verificar_campos_txt() {
+    public boolean verificar_campos_txt() {
         if (this.txtNome.getText().isEmpty() || this.txtTel.getText().equals("+55 (  )      -    ")
                 || this.txtEmail.getText().isEmpty() || this.txtCpf.getText().equals("   .   .   -  ")) {
             return true;
@@ -353,5 +362,17 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         this.txtEmail.setText(this.tblCliente.getModel().getValueAt(set, 2).toString());
         this.txtTel.setText(this.tblCliente.getModel().getValueAt(set, 3).toString());
         this.txtCpf.setText(this.tblCliente.getModel().getValueAt(set, 4).toString());
+    }
+    
+    // Método editar cliente
+    private void editar_cliente() {
+        if (verifica_disp_cpf()) {
+            TelaEditarCliente tec = new TelaEditarCliente();
+            tec.setVisible(true);
+            tec.preencher_txt(this.txtId.getText(), this.txtNome.getText(), this.txtEmail.getText(), this.txtTel.getText(), this.txtCpf.getText());
+        } else {
+            buscar_clientes();
+            JOptionPane.showMessageDialog(null, "CPF não encontrado\nSelecione o CPF na tabela abaixo");
+        }
     }
 }
