@@ -10,6 +10,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -75,11 +76,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "NOME", "E-mail", "PHONE", "CPF"
+                "ID", "NOME", "E-mail", "PHONE", "CPF"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -89,6 +90,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         jScrollPane1.setViewportView(tblCliente);
 
         btnBuscar.setText("BUSCAR");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("CPF");
 
@@ -202,6 +208,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        buscar_clientes();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -304,5 +314,22 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         this.txtEmail.setText(null);
         this.txtTel.setText(null);
         this.txtCpf.setText(null);
+    }
+    
+    // Função que irá povoar a tabela com os clientes do sistema
+    private void buscar_clientes() {
+        DefaultTableModel model = (DefaultTableModel) this.tblCliente.getModel();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("cliente.txt"));
+            String linha;
+            String[] vet = null;
+            while ((linha = br.readLine()) != null) {
+                vet = linha.split(",");
+                model.addRow(new String[]{vet[0], vet[1], vet[2], vet[3], vet[4]});
+            }
+            br.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
     }
 }
