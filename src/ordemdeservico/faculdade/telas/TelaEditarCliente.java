@@ -236,7 +236,7 @@ public class TelaEditarCliente extends javax.swing.JFrame {
             // Validando as campos txt
             JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
         } else {
-            if (verifica_disp_cpf()) {
+            if (verifica_disp_cpf() == true) {
                 // Validando se o CPF já possui cadastro
                 JOptionPane.showMessageDialog(null, "CPF já possui cadastro no sistema!");
             } else {
@@ -303,7 +303,7 @@ public class TelaEditarCliente extends javax.swing.JFrame {
             String[] vet = null;
             while ((linha = br.readLine()) != null) {
                 vet = linha.split(",");
-                if (vet[4].equals(this.txtCpf.getText())) {
+                if (vet[4].equals(this.txtCpf.getText()) && (!(this.txtId.getText().equals(vet[0])))) {
                     return true;
                 }
             }
