@@ -50,6 +50,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Ger&#xea;nciar Ordens de Servi&#xe7;o"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemMenuOsActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

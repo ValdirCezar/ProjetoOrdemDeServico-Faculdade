@@ -339,6 +339,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
     // Função que irá povoar a tabela com os clientes do sistema
     private void buscar_clientes() {
         DefaultTableModel model = (DefaultTableModel) this.tblCliente.getModel();
+        model.setNumRows(0);
         try {
             BufferedReader br = new BufferedReader(new FileReader("cliente.txt"));
             String linha;

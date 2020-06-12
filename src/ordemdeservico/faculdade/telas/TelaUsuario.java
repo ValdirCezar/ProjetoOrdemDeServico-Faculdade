@@ -364,6 +364,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     // Função que irá povoar a tabela com os usuários do sistema
     private void buscar_usuarios() {
         DefaultTableModel model = (DefaultTableModel) this.tblUsuarios.getModel();
+        model.setNumRows(0);
         try {
             BufferedReader br = new BufferedReader(new FileReader("usuario.txt"));
             String linha;
