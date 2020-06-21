@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -203,7 +204,7 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        //removerUsuario();
+        remover_usuario();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -410,5 +411,60 @@ public class TelaUsuario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "Login não encontrado!\nSelecione um login válidao na tabela abaixo");
         }
 
+    }
+    
+    // Método Remover usuário
+    private void remover_usuario() {
+        int aux = 0;
+        // Validando se o cliente possui ordens de serviço abertas em seu nome
+        if (this.txtId.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um cliente da tabela abaixo para deletar");
+            buscar_usuarios();
+        } else {
+            int opc;
+            opc = JOptionPane.showConfirmDialog(null, "Deseja deletar o usuário?", "Atenção!", JOptionPane.YES_NO_OPTION);
+            if (opc == JOptionPane.YES_OPTION) {
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader("os.txt"));
+                    String linha;
+                    String[] vet = null;
+                    while ((linha = br.readLine()) != null) {
+                        vet = linha.split(",");
+                        if (vet[2].equals(this.txtId.getText())) {
+                            aux++;
+                        }
+                    }
+                    br.close();
+
+                    if (aux > 0) {
+                        JOptionPane.showMessageDialog(null, "Usuário não pode ser deletado!\nO mesmo está relacionado a ordens de serviço no sistema");
+                    } else {
+                        BufferedReader br2 = new BufferedReader(new FileReader("usuario.txt"));
+                        ArrayList<String> array = new ArrayList<>();
+                        String linha2;
+                        String[] vet2 = null;
+                        while ((linha2 = br2.readLine()) != null) {
+                            vet2 = linha2.split(",");
+                            if (!vet2[0].equals(this.txtId.getText())) {
+                                array.add(linha2);
+                            }
+                        }
+                        br.close();
+                        // Limpando o arquivo
+                        FileWriter fw = new FileWriter("usuario.txt");
+                        fw.close();
+
+                        FileWriter fw1 = new FileWriter("usuario.txt", true);
+                        for (int i = 0; i < array.size(); i++) {
+                            fw1.write(array.get(i) + "\n");
+                        }
+                        fw1.close();
+                        JOptionPane.showMessageDialog(null, "Usuário deletado com sucesso!");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

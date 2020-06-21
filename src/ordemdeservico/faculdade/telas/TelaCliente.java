@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -68,6 +69,11 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         });
 
         btnRemover.setText("REMOVER");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("EDITAR");
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +238,10 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         editar_cliente();
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        remover_cliente();
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdicionar;
@@ -335,7 +345,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         this.txtTel.setText(null);
         this.txtCpf.setText(null);
     }
-    
+
     // Função que irá povoar a tabela com os clientes do sistema
     private void buscar_clientes() {
         DefaultTableModel model = (DefaultTableModel) this.tblCliente.getModel();
@@ -353,7 +363,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             e.getStackTrace();
         }
     }
-    
+
     // Função irá pegar as informações da linha selecionada na 
     // tabela e irá inseri-las nos campos txt
     private void preencher_campos_txt() {
@@ -364,7 +374,7 @@ public class TelaCliente extends javax.swing.JInternalFrame {
         this.txtTel.setText(this.tblCliente.getModel().getValueAt(set, 3).toString());
         this.txtCpf.setText(this.tblCliente.getModel().getValueAt(set, 4).toString());
     }
-    
+
     // Método editar cliente
     private void editar_cliente() {
         if (verifica_disp_cpf()) {
@@ -376,4 +386,60 @@ public class TelaCliente extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, "CPF não encontrado\nSelecione o CPF na tabela abaixo");
         }
     }
+
+    // Método remover cliente
+    private void remover_cliente() {
+        int aux = 0;
+        // Validando se o cliente possui ordens de serviço abertas em seu nome
+        if (this.txtId.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Selecione um cliente da tabela abaixo para deletar");
+            buscar_clientes();
+        } else {
+            int opc;
+            opc = JOptionPane.showConfirmDialog(null, "Deseja deletar o cliente?", "Atenção!", JOptionPane.YES_NO_OPTION);
+            if (opc == JOptionPane.YES_OPTION) {
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader("os.txt"));
+                    String linha;
+                    String[] vet = null;
+                    while ((linha = br.readLine()) != null) {
+                        vet = linha.split(",");
+                        if (vet[2].equals(this.txtId.getText())) {
+                            aux++;
+                        }
+                    }
+                    br.close();
+
+                    if (aux > 0) {
+                        JOptionPane.showMessageDialog(null, "Cliente não pode ser deletado!\nO mesmo está relacionados a ordens de serviço em aberto ou em andamento no sistema");
+                    } else {
+                        BufferedReader br2 = new BufferedReader(new FileReader("cliente.txt"));
+                        ArrayList<String> array = new ArrayList<>();
+                        String linha2;
+                        String[] vet2 = null;
+                        while ((linha2 = br2.readLine()) != null) {
+                            vet2 = linha2.split(",");
+                            if (!vet2[0].equals(this.txtId.getText())) {
+                                array.add(linha2);
+                            }
+                        }
+                        br.close();
+                        // Limpando o arquivo
+                        FileWriter fw = new FileWriter("cliente.txt");
+                        fw.close();
+
+                        FileWriter fw1 = new FileWriter("cliente.txt", true);
+                        for (int i = 0; i < array.size(); i++) {
+                            fw1.write(array.get(i) + "\n");
+                        }
+                        fw1.close();
+                        JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso!");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
 }
